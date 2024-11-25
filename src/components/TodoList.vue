@@ -21,8 +21,7 @@ export default {
       emit('removeTodo', item, i);
     }
     function modifyTodo(item){
-      const sendItem = {...item}
-      emit('modifyTodo', sendItem);
+      emit('modifyTodo', item);
     }
     function toggleCompleted(item){
       emit('toggleCompleted', item);
