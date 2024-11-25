@@ -3,6 +3,9 @@
     <input type="text" v-model="todoItem" placeholder="할일을 입력하세요.">
     <button type="submit">추가</button>
   </form>
+  <div class="text-al-ce">
+    <span class="txt-red">※ 할일을 체크할 경우 삭제할 수 있습니다.</span>
+  </div>
 </template>
 
 <script>
@@ -57,5 +60,11 @@ form {
       background: #0052cc;
     }
   }
+}
+span{
+  display: inline-block;
+  margin-left: auto; 
+  margin-right: 0;
+  margin-bottom: 1rem;
 }
 </style>

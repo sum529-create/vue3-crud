@@ -4,3 +4,76 @@ body {
   background: #f5f5f5;
   font-family: Arial, sans-serif;
 }
+
+/* 텍스트 정렬 */
+.text-al-le { text-align: left; }
+.text-al-ri { text-align: right; }
+.text-al-ce { text-align: center; }
+
+/* 텍스트 변환 */
+.text-tr-up { text-transform: uppercase; }
+.text-tr-lo { text-transform: lowercase; }
+
+/* 텍스트 장식 */
+.text-de-n { text-decoration: none; }
+
+/* 폰트 크기 */
+.fs-16 { font-size: 16px; }
+.fs-18 { font-size: 18px; }
+.fs-20 { font-size: 20px; }
+
+/* 폰트 굵기 */
+.fw-b { font-weight: bold; }
+.fw-n { font-weight: normal; }
+
+/* 폰트 패밀리 */
+.ff-ar { font-family: Arial, sans-serif; }
+.ff-tn { font-family: 'Times New Roman', serif; }
+
+/* 배경 색상 */
+.bg-w { background-color: #fff; }
+.bg-b { background-color: #000; }
+.bg-pr { background-color: #f5f5f5; }
+
+/* 배경 이미지 */
+.bg-img { background-image: url('image.jpg'); }
+
+/* 배경 크기 */
+.bg-cover { background-size: cover; }
+.bg-contain { background-size: contain; }
+
+/* 마진 */
+.m-10 { margin: 10px; }
+.m-20 { margin: 20px; }
+.m-30 { margin: 30px; }
+
+/* 패딩 */
+.p-10 { padding: 10px; }
+.p-20 { padding: 20px; }
+.p-30 { padding: 30px; }
+
+/* 테두리 */
+.b-1px { border: 1px solid #ccc; }
+.b-2px { border: 2px solid #000; }
+
+/* 디스플레이 */
+.d-b { display: block; }
+.d-i { display: inline; }
+.d-ib { display: inline-block; }
+.d-f { display: flex; }
+.d-g { display: grid; }
+
+/* 플렉스 */
+.flex-c { display: flex; justify-content: center; }
+.flex-b { display: flex; justify-content: space-between; }
+.flex-c-c { display: flex; justify-content: center; align-items: center; }
+
+/* 이미지 */
+.img-r { border-radius: 50%; }
+.img-contain { object-fit: contain; }
+.img-cover { object-fit: cover; }
+
+
+.txt-red{
+  color: red !important;
+}
