@@ -1,4 +1,5 @@
 import { onMounted, ref } from 'vue';
+import { v4 as uuidv4 } from 'uuid';
 
 function useTodo(){
   const itemList = ref([]);
@@ -20,7 +21,7 @@ function useTodo(){
     itemList.value = result;
   }
   function newItem(item){
-    const idx = crypto.randomUUID();
+    const idx = uuidv4();
     const newItemAbout = {
       idx: idx,
       content: item,
@@ -54,7 +55,7 @@ function useTodo(){
   onMounted(() => {
     fetchList();
   })
-  return { newItem, itemList, removeTodo, modifyTodo, selectedItem, toggleCompleted, changeTodo, onCancelTodo }
+  return { newItem, itemList, removeTodo, modifyTodo, selectedItem, toggleCompleted, changeTodo, onCancelTodo, fetchList }
 }
 
 export default useTodo;
