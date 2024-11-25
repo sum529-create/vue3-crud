@@ -26,6 +26,7 @@ export default {
       const updatedItem = {...props.selectedItem, content: newContent.value};
       emit('changeTodo', updatedItem)
       clearInput();
+      onCancelTodo();
     }
 
     watch(() => props.selectedItem, (newVal) => {
