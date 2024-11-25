@@ -1,5 +1,3 @@
-# Vue 3 + Vite
+# Vue 3로 구현한 간단한 ToDo List입니다.
 
-This template should help get you started developing with Vue 3 in Vite. The template uses Vue 3 `<script setup>` SFCs, check out the [script setup docs](https://v3.vuejs.org/api/sfc-script-setup.html#sfc-script-setup) to learn more.
-
-Learn more about IDE Support for Vue in the [Vue Docs Scaling up Guide](https://vuejs.org/guide/scaling-up/tooling.html#ide-support).
+간단한 CRUD구현, 및 vue3 기능을 사용해보고자 ref, composable, localstorage들을 다뤄 보았습니다.
