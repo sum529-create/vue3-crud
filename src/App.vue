@@ -5,7 +5,7 @@
     <todo-list :itemList="itemList" @removeTodo="removeTodo" @modifyTodo="modifyTodo"
       @toggleCompleted="toggleCompleted" />
   </div>
-  <todo-modify :selectedItem="selectedItem" @changeTodo="changeTodo" />
+  <todo-modify v-show="selectedItem.content" :selectedItem="selectedItem" @onCancelTodo="onCancelTodo" @changeTodo="changeTodo" />
 </template>
 
 <script>
@@ -18,10 +18,10 @@ import useTodo from './composable/useTodo';
 export default {
   components: { TodoInput, TodoList, TodoModify, TodoHeader },
   setup () {
-    const { newItem, itemList, removeTodo, modifyTodo, selectedItem, toggleCompleted, changeTodo } = useTodo();
+    const { newItem, itemList, removeTodo, modifyTodo, selectedItem, toggleCompleted, changeTodo, onCancelTodo } = useTodo();
     const todayTodo = computed(() => itemList.value.filter(e => e.completed !== true).length);
 
-    return { newItem, itemList, removeTodo, modifyTodo, selectedItem, toggleCompleted, changeTodo, todayTodo }
+    return { newItem, itemList, removeTodo, modifyTodo, selectedItem, toggleCompleted, changeTodo, todayTodo, onCancelTodo }
   }
 }
 </script>

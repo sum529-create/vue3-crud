@@ -1,7 +1,8 @@
 <template>
   <div class="todo-container">
     <input type="text" v-model="newContent">
-    <button @click="onChangeTodo">변경</button>
+    <button class="btn btn-green" @click="onChangeTodo">변경</button>
+    <button class="btn btn-red" @click="onCancelTodo">취소</button>
   </div>
 </template>
 
@@ -13,18 +14,32 @@ export default {
     const newContent = ref(props.selectedItem.content)
 
     function onChangeTodo(){
+      if(props.selectedItem.content === ''){
+        return alert('변경하실 할일을 선택해주세요.');
+      }
+      if(newContent.value === ''){
+        return alert('값을 입력해주세요.');
+      }
+      if(newContent.value === props.selectedItem.content){
+        return alert('이전 할일과 동일한 목록입니다!')
+      }
       const updatedItem = {...props.selectedItem, content: newContent.value};
       emit('changeTodo', updatedItem)
       clearInput();
     }
+
     watch(() => props.selectedItem, (newVal) => {
       newContent.value = newVal.content
     }, { immediate: true })
+
     function clearInput(){
       newContent.value = '';
     }
+    function onCancelTodo(){
+      emit('onCancelTodo')
+    }
 
-    return { newContent, onChangeTodo }
+    return { newContent, onChangeTodo,onCancelTodo  }
   }
 }
 </script>
@@ -50,18 +65,29 @@ div {
     }
   }
 
-  button {
+  .btn {
     padding: 8px 16px;
-    background: #28a745;
-    color: white;
     border: none;
     border-radius: 4px;
     cursor: pointer;
     font-size: 16px;
 
-    &:hover {
-      background: #218838;
+    &.btn-green{
+      background: #28a745;
+      color: white;
+      &:hover {
+        background: #218838;
+      }
     }
+
+    &.btn-red{
+      background: #ff6347;
+      color: white;
+      &:hover{
+        background: #c14934;
+      }
+    }
+
   }
 }
 </style>

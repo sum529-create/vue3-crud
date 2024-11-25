@@ -48,10 +48,13 @@ function useTodo(){
     }
     
   }
+  function onCancelTodo(){
+    selectedItem.value = '';
+  }
   onMounted(() => {
     fetchList();
   })
-  return { newItem, itemList, removeTodo, modifyTodo, selectedItem, toggleCompleted, changeTodo }
+  return { newItem, itemList, removeTodo, modifyTodo, selectedItem, toggleCompleted, changeTodo, onCancelTodo }
 }
 
 export default useTodo;
