@@ -17,7 +17,7 @@ import { ref } from 'vue'
         if(todoItem.value === ''){
           return alert('값을 추가해주세여');
         }
-        emit('newItem', todoItem.value);
+        emit('addTodo', todoItem.value);
         clearInput();
       }
       function clearInput(){

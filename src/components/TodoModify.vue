@@ -1,8 +1,8 @@
 <template>
   <div class="todo-container">
     <input type="text" v-model="newContent">
-    <button class="btn btn-green" @click="onChangeTodo">변경</button>
-    <button class="btn btn-red" @click="onCancelTodo">취소</button>
+    <button class="btn btn-green" @click="onupdateTodo">변경</button>
+    <button class="btn btn-red" @click="cancelEditing">취소</button>
   </div>
 </template>
 
@@ -13,7 +13,7 @@ export default {
   setup (props, {emit}) {
     const newContent = ref(props.selectedItem.content)
 
-    function onChangeTodo(){
+    function onupdateTodo(){
       if(props.selectedItem.content === ''){
         return alert('변경하실 할일을 선택해주세요.');
       }
@@ -24,9 +24,9 @@ export default {
         return alert('이전 할일과 동일한 목록입니다!')
       }
       const updatedItem = {...props.selectedItem, content: newContent.value};
-      emit('changeTodo', updatedItem)
+      emit('updateTodo', updatedItem)
       clearInput();
-      onCancelTodo();
+      cancelEditing();
     }
 
     watch(() => props.selectedItem, (newVal) => {
@@ -36,11 +36,11 @@ export default {
     function clearInput(){
       newContent.value = '';
     }
-    function onCancelTodo(){
-      emit('onCancelTodo')
+    function cancelEditing(){
+      emit('cancelEditing')
     }
 
-    return { newContent, onChangeTodo,onCancelTodo  }
+    return { newContent, onupdateTodo,cancelEditing  }
   }
 }
 </script>

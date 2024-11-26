@@ -1,9 +1,9 @@
 <template>
   <ul>
     <li v-for="(item, i) in itemList" :key="i">
-      <input type="checkbox" v-model="item.completed" @change="toggleCompleted(item)">
-      <span @click="modifyTodo(item, i)" :class="{'completed': item.completed}">{{ item.content }}</span>
-      <button v-show="item.completed" @click="removeTodo(item, i)">삭제</button>
+      <input type="checkbox" v-model="item.completed" @change="toggleTodo(item)">
+      <span @click="startEditing(item, i)" :class="{'completed': item.completed}">{{ item.content }}</span>
+      <button v-show="item.completed" @click="deleteTodo(item, i)">삭제</button>
     </li>
   </ul>
 </template>
@@ -17,17 +17,17 @@ export default {
     }
   },
   setup (_, {emit}) {
-    function removeTodo(item, i){
-      emit('removeTodo', item, i);
+    function deleteTodo(item, i){
+      emit('deleteTodo', item, i);
     }
-    function modifyTodo(item){
-      emit('modifyTodo', item);
+    function startEditing(item){
+      emit('startEditing', item);
     }
-    function toggleCompleted(item){
-      emit('toggleCompleted', item);
+    function toggleTodo(item){
+      emit('toggleTodo', item);
     }
 
-    return { removeTodo, modifyTodo, toggleCompleted }
+    return { deleteTodo, startEditing, toggleTodo }
   }
 }
 </script>

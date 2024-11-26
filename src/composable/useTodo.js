@@ -7,34 +7,34 @@ function useTodo(){
   const selectedItem = ref({});
 
   // Computed
-  const todayTodo = computed(() => itemList.value.filter(e => e.completed !== true).length);
+  const incompleteTodosCount = computed(() => itemList.value.filter(e => e.completed !== true).length);
 
   // Methods
-  function fetchList(){
+  function loadTodos(){
     itemList.value = storage.getAllTodos();
   }
-  function newItem(item){
+  function addTodo(item){
     const idx = uuidv4();
-    const newItemAbout = {
+    const addTodoAbout = {
       idx: idx,
       content: item,
       completed: false,
     }
-    storage.setItem(idx, newItemAbout);
-    itemList.value.push(newItemAbout);
+    storage.setItem(idx, addTodoAbout);
+    itemList.value.push(addTodoAbout);
   }
-  function removeTodo(item, i){
+  function deleteTodo(item, i){
     itemList.value.splice(i, 1);
     storage.removeItem(item.idx);
   }
-  function modifyTodo(item){
+  function startEditing(item){
     // Object.assign(selectedItem.value, item);
     selectedItem.value = {...item};
   }
-  function toggleCompleted(item){
+  function toggleTodo(item){
     storage.setItem(item.idx, item);
   }
-  function changeTodo(item){
+  function updateTodo(item){
     const index = itemList.value.findIndex(e => e.idx === item.idx);
     if(index !== -1){
       itemList.value[index] = {...item};
@@ -42,13 +42,13 @@ function useTodo(){
     }
     
   }
-  function onCancelTodo(){
+  function cancelEditing(){
     selectedItem.value = '';
   }
   onMounted(() => {
-    fetchList();
+    loadTodos();
   })
-  return { newItem, itemList, removeTodo, modifyTodo, selectedItem, toggleCompleted, changeTodo, onCancelTodo, fetchList, todayTodo }
+  return { addTodo, itemList, deleteTodo, startEditing, selectedItem, toggleTodo, updateTodo, cancelEditing, loadTodos, incompleteTodosCount }
 }
 
 export default useTodo;

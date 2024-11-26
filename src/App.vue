@@ -1,11 +1,11 @@
 <template>
   <div class="todo-container">
-    <todo-header :itemCount="todayTodo"/>
-    <todo-input @newItem="newItem" />
-    <todo-list :itemList="itemList" @removeTodo="removeTodo" @modifyTodo="modifyTodo"
-      @toggleCompleted="toggleCompleted" />
+    <todo-header :itemCount="incompleteTodosCount"/>
+    <todo-input @addTodo="addTodo" />
+    <todo-list :itemList="itemList" @deleteTodo="deleteTodo" @startEditing="startEditing"
+      @toggleTodo="toggleTodo" />
   </div>
-  <todo-modify v-show="selectedItem.content" :selectedItem="selectedItem" @onCancelTodo="onCancelTodo" @changeTodo="changeTodo" />
+  <todo-modify v-show="selectedItem.content" :selectedItem="selectedItem" @cancelEditing="cancelEditing" @updateTodo="updateTodo" />
 </template>
 
 <script>
@@ -17,9 +17,9 @@ import useTodo from './composable/useTodo';
 export default {
   components: { TodoInput, TodoList, TodoModify, TodoHeader },
   setup () {
-    const { newItem, itemList, removeTodo, modifyTodo, selectedItem, toggleCompleted, changeTodo, todayTodo, onCancelTodo } = useTodo();
+    const { addTodo, itemList, deleteTodo, startEditing, selectedItem, toggleTodo, updateTodo, incompleteTodosCount, cancelEditing } = useTodo();
 
-    return { newItem, itemList, removeTodo, modifyTodo, selectedItem, toggleCompleted, changeTodo, todayTodo, onCancelTodo }
+    return { addTodo, itemList, deleteTodo, startEditing, selectedItem, toggleTodo, updateTodo, incompleteTodosCount, cancelEditing }
   }
 }
 </script>
