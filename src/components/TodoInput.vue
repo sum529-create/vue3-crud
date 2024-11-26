@@ -11,6 +11,7 @@
 <script>
 import { ref } from 'vue'
   export default {
+    emits: ['addTodo'],
     setup(_, {emit}){
       const todoItem = ref('')
       function addItem() {

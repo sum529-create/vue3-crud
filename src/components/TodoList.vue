@@ -16,6 +16,7 @@ export default {
       requied: true
     }
   },
+  emits: ['deleteTodo', 'startEditing', 'toggleTodo'],
   setup (_, {emit}) {
     function deleteTodo(item, i){
       emit('deleteTodo', item, i);

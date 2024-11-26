@@ -9,7 +9,8 @@
 <script>
 import { ref, watch } from 'vue'
 export default {
-  props: ['selectedItem'],
+  props: ['selectedItem', 'cancelEditing'],
+  emits:['updateTodo'],
   setup (props, {emit}) {
     const newContent = ref(props.selectedItem.content)
 
