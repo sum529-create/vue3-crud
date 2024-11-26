@@ -26,6 +26,7 @@ function useTodo(){
   function deleteTodo(item, i){
     itemList.value.splice(i, 1);
     storage.removeItem(item.idx);
+    cancelEditing();
   }
   function startEditing(item){
     // Object.assign(selectedItem.value, item);
