@@ -1,24 +1,17 @@
-import { onMounted, ref } from 'vue';
+import { onMounted, ref, computed } from 'vue';
 import { v4 as uuidv4 } from 'uuid';
+import { storage } from '../utils/storage';
 
 function useTodo(){
   const itemList = ref([]);
   const selectedItem = ref({});
-  
+
+  // Computed
+  const todayTodo = computed(() => itemList.value.filter(e => e.completed !== true).length);
+
+  // Methods
   function fetchList(){
-    const result = [];
-    for(let i=0; i<localStorage.length; i++){
-      const key = localStorage.key(i);
-      const todoItem = localStorage.getItem(key);
-      
-      try {
-        const parsedItem = JSON.parse(todoItem);
-        result.push(parsedItem); // 객체로 변환하여 배열에 추가
-      } catch (error) {
-        console.error("Invalid JSON format for key:", key, todoItem);
-      }
-    }
-    itemList.value = result;
+    itemList.value = storage.getAllTodos();
   }
   function newItem(item){
     const idx = uuidv4();
@@ -27,25 +20,25 @@ function useTodo(){
       content: item,
       completed: false,
     }
-    localStorage.setItem(idx, JSON.stringify(newItemAbout));
+    storage.setItem(idx, newItemAbout);
     itemList.value.push(newItemAbout);
   }
   function removeTodo(item, i){
     itemList.value.splice(i, 1);
-    localStorage.removeItem(item.idx);
+    storage.removeItem(item.idx);
   }
   function modifyTodo(item){
     // Object.assign(selectedItem.value, item);
     selectedItem.value = {...item};
   }
   function toggleCompleted(item){
-    localStorage.setItem(item.idx, JSON.stringify(item));
+    storage.setItem(item.idx, item);
   }
   function changeTodo(item){
     const index = itemList.value.findIndex(e => e.idx === item.idx);
     if(index !== -1){
       itemList.value[index] = {...item};
-      localStorage.setItem(item.idx, JSON.stringify(item))
+      storage.setItem(item.idx, item);
     }
     
   }
@@ -55,7 +48,7 @@ function useTodo(){
   onMounted(() => {
     fetchList();
   })
-  return { newItem, itemList, removeTodo, modifyTodo, selectedItem, toggleCompleted, changeTodo, onCancelTodo, fetchList }
+  return { newItem, itemList, removeTodo, modifyTodo, selectedItem, toggleCompleted, changeTodo, onCancelTodo, fetchList, todayTodo }
 }
 
 export default useTodo;

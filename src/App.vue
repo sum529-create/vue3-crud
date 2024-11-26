@@ -9,7 +9,6 @@
 </template>
 
 <script>
-import { computed } from 'vue';
 import TodoHeader from './components/TodoHeader.vue';
 import TodoInput from './components/TodoInput.vue'
 import TodoList from './components/TodoList.vue';
@@ -18,8 +17,7 @@ import useTodo from './composable/useTodo';
 export default {
   components: { TodoInput, TodoList, TodoModify, TodoHeader },
   setup () {
-    const { newItem, itemList, removeTodo, modifyTodo, selectedItem, toggleCompleted, changeTodo, onCancelTodo } = useTodo();
-    const todayTodo = computed(() => itemList.value.filter(e => e.completed !== true).length);
+    const { newItem, itemList, removeTodo, modifyTodo, selectedItem, toggleCompleted, changeTodo, todayTodo, onCancelTodo } = useTodo();
 
     return { newItem, itemList, removeTodo, modifyTodo, selectedItem, toggleCompleted, changeTodo, todayTodo, onCancelTodo }
   }
