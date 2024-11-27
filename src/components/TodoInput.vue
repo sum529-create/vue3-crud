@@ -1,6 +1,6 @@
 <template>
   <form @submit.prevent="addItem">
-    <input type="text" v-model="todoItem" placeholder="할일을 입력하세요.">
+    <input type="text" v-model="todoItem" placeholder="할일을 입력하세요." />
     <button type="submit">추가</button>
   </form>
   <div class="text-al-ce">
@@ -9,24 +9,25 @@
 </template>
 
 <script>
-import { ref } from 'vue'
-  export default {
-    emits: ['addTodo'],
-    setup(_, {emit}){
-      const todoItem = ref('')
-      function addItem() {
-        if(todoItem.value === ''){
-          return alert('값을 추가해주세여');
-        }
-        emit('addTodo', todoItem.value);
-        clearInput();
+import { ref } from "vue";
+ß;
+export default {
+  emits: ["addTodo"],
+  setup(_, { emit }) {
+    const todoItem = ref("");
+    function addItem() {
+      if (todoItem.value === "") {
+        return alert("값을 추가해주세여");
       }
-      function clearInput(){
-        todoItem.value = '';
-      }
-      return {todoItem, addItem};
+      emit("addTodo", todoItem.value);
+      clearInput();
     }
-  }
+    function clearInput() {
+      todoItem.value = "";
+    }
+    return { todoItem, addItem };
+  },
+};
 </script>
 
 <style lang="scss" scoped>
@@ -41,7 +42,7 @@ form {
     border: 1px solid #ddd;
     border-radius: 4px;
     font-size: 16px;
-    
+
     &:focus {
       outline: none;
       border-color: #0066ff;
@@ -62,9 +63,9 @@ form {
     }
   }
 }
-span{
+span {
   display: inline-block;
-  margin-left: auto; 
+  margin-left: auto;
   margin-right: 0;
   margin-bottom: 1rem;
 }

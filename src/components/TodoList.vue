@@ -1,8 +1,16 @@
 <template>
   <ul>
     <li v-for="(item, i) in itemList" :key="i">
-      <input type="checkbox" v-model="item.completed" @change="toggleTodo(item)">
-      <span @click="startEditing(item, i)" :class="{'completed': item.completed}">{{ item.content }}</span>
+      <input
+        type="checkbox"
+        v-model="item.completed"
+        @change="toggleTodo(item)"
+      />
+      <span
+        @click="startEditing(item, i)"
+        :class="{ completed: item.completed }"
+        >{{ item.content }}</span
+      >
       <button v-show="item.completed" @click="deleteTodo(item, i)">삭제</button>
     </li>
   </ul>
@@ -10,27 +18,27 @@
 
 <script>
 export default {
-  props:{
-    itemList:{
+  props: {
+    itemList: {
       type: Array,
-      requied: true
-    }
+      requied: true,
+    },
   },
-  emits: ['deleteTodo', 'startEditing', 'toggleTodo'],
-  setup (_, {emit}) {
-    function deleteTodo(item, i){
-      emit('deleteTodo', item, i);
+  emits: ["deleteTodo", "startEditing", "toggleTodo"],
+  setup(_, { emit }) {
+    function deleteTodo(item, i) {
+      emit("deleteTodo", item, i);
     }
-    function startEditing(item){
-      emit('startEditing', item);
+    function startEditing(item) {
+      emit("startEditing", item);
     }
-    function toggleTodo(item){
-      emit('toggleTodo', item);
+    function toggleTodo(item) {
+      emit("toggleTodo", item);
     }
 
-    return { deleteTodo, startEditing, toggleTodo }
-  }
-}
+    return { deleteTodo, startEditing, toggleTodo };
+  },
+};
 </script>
 
 <style lang="scss" scoped>

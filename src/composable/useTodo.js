@@ -1,55 +1,67 @@
-import { onMounted, ref, computed } from 'vue';
-import { v4 as uuidv4 } from 'uuid';
-import { storage } from '../utils/storage';
+import { onMounted, ref, computed } from "vue";
+import { v4 as uuidv4 } from "uuid";
+import { storage } from "../utils/storage";
 
-function useTodo(){
+function useTodo() {
   const itemList = ref([]);
   const selectedItem = ref({});
 
   // Computed
-  const incompleteTodosCount = computed(() => itemList.value.filter(e => e.completed !== true).length);
+  const incompleteTodosCount = computed(
+    () => itemList.value.filter((e) => e.completed !== true).length
+  );
 
   // Methods
-  function loadTodos(){
+  function loadTodos() {
     itemList.value = storage.getAllTodos();
   }
-  function addTodo(item){
+  function addTodo(item) {
     const idx = uuidv4();
     const addTodoAbout = {
       idx: idx,
       content: item,
       completed: false,
-    }
+    };
     storage.setItem(idx, addTodoAbout);
     itemList.value.push(addTodoAbout);
   }
-  function deleteTodo(item, i){
+  function deleteTodo(item, i) {
     itemList.value.splice(i, 1);
     storage.removeItem(item.idx);
     cancelEditing();
   }
-  function startEditing(item){
+  function startEditing(item) {
     // Object.assign(selectedItem.value, item);
-    selectedItem.value = {...item};
+    selectedItem.value = { ...item };
   }
-  function toggleTodo(item){
+  function toggleTodo(item) {
     storage.setItem(item.idx, item);
   }
-  function updateTodo(item){
-    const index = itemList.value.findIndex(e => e.idx === item.idx);
-    if(index !== -1){
-      itemList.value[index] = {...item};
+  function updateTodo(item) {
+    const index = itemList.value.findIndex((e) => e.idx === item.idx);
+    if (index !== -1) {
+      itemList.value[index] = { ...item };
       storage.setItem(item.idx, item);
     }
-    
   }
-  function cancelEditing(){
-    selectedItem.value = '';
+  function cancelEditing() {
+    selectedItem.value = "";
   }
   onMounted(() => {
     loadTodos();
-  })
-  return { addTodo, itemList, deleteTodo, startEditing, selectedItem, toggleTodo, updateTodo, cancelEditing, loadTodos, incompleteTodosCount }
+  });
+  return {
+    addTodo,
+    itemList,
+    deleteTodo,
+    startEditing,
+    selectedItem,
+    toggleTodo,
+    updateTodo,
+    cancelEditing,
+    loadTodos,
+    incompleteTodosCount,
+  };
 }
 
 export default useTodo;

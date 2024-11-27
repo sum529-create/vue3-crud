@@ -7,13 +7,11 @@
 
 <script>
 export default {
-  props:['itemCount'],
-  setup () {
-    
-
-    return {}
-  }
-}
+  props: ["itemCount"],
+  setup() {
+    return {};
+  },
+};
 </script>
 
 <style lang="scss" scoped>
@@ -36,7 +34,7 @@ div {
     padding: 6px 12px;
     border-radius: 20px;
     display: inline-block;
-    box-shadow: 0 2px 5px rgba(0,102,255,0.2);
+    box-shadow: 0 2px 5px rgba(0, 102, 255, 0.2);
     transition: transform 0.2s;
 
     &:hover {
